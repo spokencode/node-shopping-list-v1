@@ -4,7 +4,7 @@ const router = express.Router();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-const {ShoppingList} = require('./models');
+const {ShoppingList, Recipes} = require('./models');
 
 const jsonParser = bodyParser.json();
 const app = express();
@@ -24,6 +24,27 @@ app.get('/shopping-list', (req, res) => {
   res.json(ShoppingList.get());
 });
 
+Recipes.create('cake', ['eggs', 'flour', 'sugar']);
+Recipes.create('salad', ['lettuce', 'spinach', 'tomatoes']);
+Recipes.create('PBJ', ['peanut butter', 'jelly', 'bread']);
+
+app.get('/recipe', (req,res) => {
+	res.json(Recipes.get());
+});
+
 app.listen(process.env.PORT || 8080, () => {
   console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
